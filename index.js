@@ -2,9 +2,13 @@
 
 const express = require('express');
 const app = express()
+const cors = require('cors')
+
 const {initializeDatabase} = require('./database/database.connect')
 app.use(express.json());
+app.use(cors())
 const Book = require('./models/book.models')
+initializeDatabase()
 
 //q1
 
@@ -234,18 +238,6 @@ const addNewBookData = async (bookData) => {
 
      }
  })
-const PORT = 3000
-const start = async () => {
-    try{
-    await initializeDatabase()
-    app.listen(PORT , () => {
-        console.log(`Server is running on port ${PORT}`)
-    })
-    }
-    catch(error){
-        throw error.message
-    }
-}
 
- start()
+module.exports = app;
 
